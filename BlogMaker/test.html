@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script>
+        function perform() {
+            var text = 'nima';
+            var post_id = 12;
+            var title = 'karimi';
+
+            var req = new FormData();
+            req.append('post_id', post_id);
+            req.append('text', text);
+            req.append('title', title);
+
+
+            var xmlRequest = new XMLHttpRequest();
+            xmlRequest.open('POST', 'http://127.0.0.1:8000/auth/test/', true);
+            xmlRequest.setRequestHeader('X-Token', 'Token12919u21i40dnfunq');
+
+            xmlRequest.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var ans = JSON.parse(this.response.toString());
+                    if (ans.status === -1) alert('Oops Something went wrong:\n' + ans.message);
+                    else {
+                        /*console.log(ans.comment.text + ' beforeeee');
+                        console.log(ans.comment.text + ' ' + ans.comment.datetime);*/
+                        console.log(ans)
+                    }
+                }
+            };
+
+            xmlRequest.send(req);
+        }
+        perform()
+    </script>
+</head>
+<body>
+
+</body>
+</html>
